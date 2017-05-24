@@ -1,3 +1,8 @@
+0.10.1
+======
+
+* Improved documentation
+
 0.10
 ====
 

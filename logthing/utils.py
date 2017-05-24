@@ -5,10 +5,12 @@ from functools import wraps
 # Constants
 # =============================================================================
 
-#: Log formatting for vt100 with function name highlighted and message
+#: Log formatting constant that uses vt100 escape sequences to produce 
+#: highlighted function names and displays the message
 LOG_FORMAT_ESCAPED = '\033[1m%(funcName)s\033[0m: %(message)s'
 
-#: Log format for files with date/time, function info, pid/tid and message
+#: Typical log formatting contsant shows date/time, function info, pid/tid and 
+#: message
 LOG_FORMAT_STANDARD = ('%(asctime)s %(name)s.%(funcName)s: '
     'pid:tid=%(process)d:%(thread)d %(message)s')
 
@@ -17,7 +19,8 @@ LOG_FORMAT_STANDARD = ('%(asctime)s %(name)s.%(funcName)s: '
 # =============================================================================
 
 def configure_file_logger(name, log_dir, log_level=logging.DEBUG):
-    """Configures logging to use the :class:`SizeRotatingFileHandler`"""
+    """Shortcut method that sets up logging to use the 
+    :class:`SizeRotatingFileHandler` with the LOG_FORMAT_STANDARD display."""
     from .srothandler import SizeRotatingFileHandler
 
     root = logging.getLogger()
@@ -30,7 +33,8 @@ def configure_file_logger(name, log_dir, log_level=logging.DEBUG):
 
 
 def configure_stdout_logger(log_level=logging.DEBUG):
-    """Configures logging to use STDOUT"""
+    """Shortcut method that sets up logging to use STDOUT and with the
+    LOG_FORMAT_ESCAPED configuration."""
     root = logging.getLogger()
     root.setLevel(log_level)
 
@@ -43,8 +47,10 @@ def configure_stdout_logger(log_level=logging.DEBUG):
 
 def default_logging_dict(log_dir, handlers=['file'], filename='debug.log'):
     """Returns a logging configuration dictionary with reasonable defaults.
-    Defines two handlers: "default" and "file", that go to STDOUT and a
-    :class:`SizeRotatingFileHandler`.
+    Defines two handlers: "default" goes to STDOUT using the
+    LOG_FORMAT_ESCAPED configuration and "file" uses a
+    :class:`SizeRotatingFileHandler` with the LOG_FORMAT_STANDARDD 
+    configuration.  Only the "file" hanlder is on by default.
 
     :param log_dir:
         Directory for logs to go into.
@@ -94,8 +100,10 @@ def default_logging_dict(log_dir, handlers=['file'], filename='debug.log'):
 # ============================================================================
 
 def silence_logging(method):
-    """Disables logging for the duration of what is being wrapped.  This is
-    particularly useful when testing if a test method is supposed to issue an
+    """Context wrapper that on entry disables logging and turns it back on
+    upon exit.  
+    
+    Often useful when testing if a test method is supposed to issue an
     error message which is confusing that the error shows for a successful
     test.
     """

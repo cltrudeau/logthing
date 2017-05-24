@@ -2,17 +2,14 @@
 
 Version: |version|
 
-Log Tools
-=========
-
 Log Handler
------------
+===========
 
 .. automodule:: logthing.srothandler
     :members:
 
 Log Utils
----------
+=========
 
 .. automodule:: logthing.utils
     :members:

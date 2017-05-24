@@ -57,18 +57,19 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
 
     def __init__(self, filename, mode='a', maxBytes=0, encoding=None, 
             debug=True, delay=0):
-        """
-        Open the specified file and use it as the stream for logging.
+        # -----------------------------
+        # Open the specified file and use it as the stream for logging.
+        #
+        # By default, the file grows indefinitely. You can specify particular
+        # values of maxBytes to allow the file to rollover at a predetermined
+        # size.
+        #
+        # Rollover occurs whenever the current log file is nearly maxBytes in
+        # length.  Old files are renamed based on timestamps.
+        #
+        # If maxBytes is zero, rollover never occurs.
+        # -----------------------------
 
-        By default, the file grows indefinitely. You can specify particular
-        values of maxBytes to allow the file to rollover at a predetermined
-        size.
-
-        Rollover occurs whenever the current log file is nearly maxBytes in
-        length.  Old files are renamed based on timestamps.
-
-        If maxBytes is zero, rollover never occurs.
-        """
         # Absolute file name handling done by FileHandler since Python 2.5  
         BaseRotatingHandler.__init__(self, filename, mode, encoding, delay)
         self.delay = delay
@@ -89,12 +90,12 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
         self.stream_lock = open(lock_file,"w")
     
     def _open(self, mode=None):
-        """
-        Open the current base file with the (original) mode and encoding.
-        Return the resulting stream.
-        
-        Note:  Copied from stdlib.  Added option to override 'mode'
-        """
+        # -----------------------------
+        # Open the current base file with the (original) mode and encoding.
+        # Return the resulting stream.
+        #  
+        # Note:  Copied from stdlib.  Added option to override 'mode'
+        # -----------------------------
         if mode is None:
             mode = self.mode
         if self.encoding is None:
@@ -104,8 +105,10 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
         return stream
     
     def _close(self):
-        """ Close file stream.  Unlike close(), we don't tear anything down, we
-        expect the log to be re-opened after rotation."""
+        # -----------------------------
+        # Close file stream.  Unlike close(), we don't tear anything down, we
+        # expect the log to be re-opened after rotation.
+        # -----------------------------
         if self.stream:
             try:
                 if not self.stream.closed:
@@ -116,8 +119,11 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
                 self.stream = None
     
     def acquire(self):
-        """ Acquire thread and file locks.  Re-opening log for 'degraded' mode.
-        """
+        # -----------------------------
+        # Acquire thread and file locks.  Re-opening log for 'degraded' mode.
+        #
+        # -----------------------------
+
         # handle thread lock
         if Handler:
             # under some tests Handler ends up being null due to instantiation
@@ -145,8 +151,10 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
         # Stream will be opened as part by FileHandler.emit()
 
     def release(self):
-        """ Release file and thread locks. If in 'degraded' mode, close the
-        stream to reduce contention until the log files can be rotated. """
+        # -----------------------------
+        # Release file and thread locks. If in 'degraded' mode, close the
+        # stream to reduce contention until the log files can be rotated. """
+        # -----------------------------
         try:
             if self._rotateFailed:
                 self._close()
@@ -197,9 +205,9 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
                 self._rotateFailed = False
     
     def doRollover(self):
-        """
-        Do a rollover, as described in __init__().
-        """
+        # -----------------------------
+        # Do a rollover, as described in __init__().
+        # -----------------------------
         self._close()
 
         try:
@@ -235,13 +243,15 @@ class SizeRotatingFileHandler(BaseRotatingHandler):
                 self.stream = self._open()
     
     def shouldRollover(self, record):
-        """
-        Determine if rollover should occur.
+        # -----------------------------
+        # Determine if rollover should occur.
 
-        For those that are keeping track. This differs from the standard
-        library's RotatingLogHandler class. Because there is no promise to keep
-        the file size under maxBytes we ignore the length of the current record.
-        """
+        # For those that are keeping track. This differs from the standard
+        # library's RotatingLogHandler class. Because there is no promise to
+        # keep the file size under maxBytes we ignore the length of the
+        # current record.
+        # -----------------------------
+
         del record  # avoid pychecker warnings
         # Is stream is not yet open, skip rollover check. (Check will occur on
         # next message, after emit() calls _open())
