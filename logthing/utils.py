@@ -72,7 +72,7 @@ def default_logging_dict(log_dir, handlers=['file'], filename='debug.log'):
             },
             'file': {
                 'level':'DEBUG',
-                'class':'wrench.logtools.srothandler.SizeRotatingFileHandler',
+                'class':'logthing.srothandler.SizeRotatingFileHandler',
                 'filename': os.path.abspath(os.path.join(log_dir, filename)),
                 'formatter':'standard',
                 'maxBytes':300000,

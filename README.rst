@@ -1,24 +1,25 @@
-wrench
-******
+logthing
+********
 
-Another tool for your python toolset.  General odds and ends that kept coming
-up in projects.
+Some useful tools for logging.  First of is the SRotHandler, a rotating file
+handler with a size limit.  Second is a series of utilities for configuring
+your logging
 
 Installation
 ============
 
 .. code-block:: bash
 
-    $ pip install wrench
+    $ pip install logthing
 
 Supports
 ========
 
-Python wrench has been tested with Python 2.7, 3.4, and 3.5
+logthing has been tested with Python 2.7, 3.5, and 3.6
 
 Docs & Source
 =============
 
-Docs: http://python-wrench.readthedocs.io/en/latest/
+Docs: http://logthing.readthedocs.io/en/latest/
 
-Source: https://github.com/cltrudeau/wrench
+Source: https://github.com/cltrudeau/logthing

@@ -2,4 +2,4 @@
 
 echo "============================================================"
 echo "== pyflakes =="
-pyflakes wrench
+pyflakes logthing unittests

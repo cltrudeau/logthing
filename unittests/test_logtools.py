@@ -1,11 +1,12 @@
-import os, sys, copy
+import os, sys
 import logging.config
 from six import StringIO
 from unittest import TestCase
 
-from wrench.contexts import temp_directory, capture_stderr
-from wrench.logtools.utils import (configure_file_logger, 
-    configure_stdout_logger, default_logging_dict, silence_logging)
+from context_temp import temp_directory
+from waelstow import capture_stderr
+from logthing.utils import (configure_file_logger, configure_stdout_logger, 
+    default_logging_dict, silence_logging)
 
 # =============================================================================
 

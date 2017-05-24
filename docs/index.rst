@@ -2,17 +2,20 @@
 
 Version: |version|
 
-Contents
-========
+Log Tools
+=========
 
-.. toctree::
-   :maxdepth: 2
+Log Handler
+-----------
 
-   contexts
-   logtools
-   utils
-   waelstow
+.. automodule:: logthing.srothandler
+    :members:
 
+Log Utils
+---------
+
+.. automodule:: logthing.utils
+    :members:
 
 Indices and tables
 ==================
