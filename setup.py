@@ -37,7 +37,7 @@ SETUP_ARGS = dict(
     ],
     tests_require=[
         'context_temp==0.10.0',
-        'waelstow==0.10.0',
+        'waelstow==0.10.1',
     ],
 )
 
