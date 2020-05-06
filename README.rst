@@ -17,6 +17,8 @@ Supports
 
 logthing has been tested with Python 3.6, 3.7, and 3.8
 
+For Python 2 compatible source use version 0.10.1
+
 Docs & Source
 =============
 
