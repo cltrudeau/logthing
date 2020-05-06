@@ -15,7 +15,7 @@ Installation
 Supports
 ========
 
-logthing has been tested with Python 2.7, 3.5, and 3.6
+logthing has been tested with Python 3.6, 3.7, and 3.8
 
 Docs & Source
 =============

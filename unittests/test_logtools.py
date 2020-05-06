@@ -1,6 +1,6 @@
 import os, sys
 import logging.config
-from six import StringIO
+from io import StringIO
 from unittest import TestCase
 
 from context_temp import temp_directory
